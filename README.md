@@ -28,54 +28,69 @@ Write your own steps
 
 ## PROGRAM
 
-### Name: 
-### Register Number:
+### Name: G.TEJASWINI
+### Register Number: 212222230157
 
 ```python
 class PeopleClassifier(nn.Module):
-    def __init__(self, input_size):
+    def __init__(self, input_size):  # Corrected: __init__ instead of _init
         super(PeopleClassifier, self).__init__()
-        #Include your code here
-
-
+        self.fc1 = nn.Linear(input_size, 128)
+        self.fc2 = nn.Linear(128, 64)
+        self.fc3 = nn.Linear(64, 4)
+        self.relu = nn.ReLU()
+        self.softmax = nn.Softmax(dim=1)
 
     def forward(self, x):
-        #Include your code here
+        x = self.relu(self.fc1(x))
+        x = self.relu(self.fc2(x))
+        x = self.fc3(x)
+        x = self.softmax(x)
+        return x
         
 
 ```
 ```python
-# Initialize the Model, Loss Function, and Optimizer
-
-
+model = PeopleClassifier(input_size=X_train.shape[1])
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.Adam(model.parameters(), lr=0.001)
 ```
 ```python
 def train_model(model, train_loader, criterion, optimizer, epochs):
-    #Include your code here
+    for epoch in range(epochs):
+        model.train()
+        for x_batch, y_batch in train_loader:
+            optimizer.zero_grad()
+            outputs = model(x_batch)
+            loss = criterion(outputs, y_batch)
+            loss.backward()
+            optimizer.step()
+
+        if (epoch + 1) % 10 == 0:
+            print(f'Epoch [{epoch+1}/{epochs}], Loss: {loss.item():.4f}')
 ```
 
 
 
 ## Dataset Information
 
-Include screenshot of the dataset
+![image](https://github.com/user-attachments/assets/28514589-4307-4616-bc5a-3107da94ace1)
+
 
 ## OUTPUT
 
-
-
 ### Confusion Matrix
 
-Include confusion matrix here
+![image](https://github.com/user-attachments/assets/69effeb6-d219-412c-b74c-cca0d0056595)
 
 ### Classification Report
 
-Include Classification Report here
-
+![image](https://github.com/user-attachments/assets/b6e64068-c069-4589-96cf-b4df55579eba)
 
 ### New Sample Data Prediction
 
-Include your sample input and output here
+![image](https://github.com/user-attachments/assets/252a9090-d4ca-476e-8b41-f1f2197441b1)
+
 
 ## RESULT
-Include your result here
+Thus the neural network classification model for the given dataset is developed successfully.
