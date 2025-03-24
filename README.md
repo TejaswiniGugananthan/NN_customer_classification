@@ -20,12 +20,26 @@ You are required to help the manager to predict the right group of the new custo
 ## DESIGN STEPS
 
 ### STEP 1:
-Write your own steps
+Data Preprocessing: Clean, normalize, and split data into training, validation, and test sets.
 
 ### STEP 2:
+Model Design:
+
+Input Layer: Number of neurons = features.
+Hidden Layers: 2 layers with ReLU activation.
+Output Layer: 4 neurons (segments A, B, C, D) with softmax activation.
 
 ### STEP 3:
+Model Compilation: Use categorical crossentropy loss, Adam optimizer, and track accuracy.
 
+### STEP 4:
+Training: Train with early stopping, batch size (e.g., 32), and suitable epochs.
+
+### STEP 5:
+Evaluation: Assess using accuracy, confusion matrix, precision, and recall.
+
+### STEP 6:
+Optimization: Tune hyperparameters (layers, neurons, learning rate, batch size).
 
 ## PROGRAM
 
